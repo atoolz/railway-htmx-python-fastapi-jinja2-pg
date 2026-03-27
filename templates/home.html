@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}HTMX + FastAPI + Jinja2 + PostgreSQL{% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-bold mb-2">Todo App</h1>
+<p class="text-gray-400 mb-8">HTMX + Python + FastAPI + Jinja2 + PostgreSQL</p>
+
+<form
+  hx-post="/todos"
+  hx-target="#todo-list"
+  hx-swap="afterbegin"
+  hx-on::after-request="if(event.detail.successful) this.reset(); document.getElementById('empty-state')?.remove()"
+  class="flex gap-2 mb-6"
+>
+  <input
+    type="text"
+    name="title"
+    required
+    placeholder="What needs to be done?"
+    class="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-gray-100 placeholder-gray-500 focus:outline-none focus:border-blue-500"
+  />
+  <button
+    type="submit"
+    class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors"
+  >
+    Add
+  </button>
+</form>
+
+<div id="todo-list">
+  {% for todo in todos %}
+    {% include "todo_item.html" %}
+  {% endfor %}
+</div>
+
+{% if not todos %}
+  <p id="empty-state" class="text-gray-500 text-center py-8">No todos yet. Add one above.</p>
+{% endif %}
+{% endblock %}
