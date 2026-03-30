@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <a href="https://railway.com/deploy/htmx-fastapi-postgresql-starter-kit">
+  <a href="https://railway.com/deploy/htmx-fastapi-jinja2-postgres">
     <img src="https://railway.com/button.svg" alt="Deploy on Railway">
   </a>
 </p>
